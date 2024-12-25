@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+    <title>Library Management System</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Online Library</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">
+              Home <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+    <div id="alertuser"></div>
+
+    <div class="container my-3">
+      <h1>Welcome to My Library</h1>
+      <hr />
+      <form id="mylibraryform">
+        <div class="form-group">
+          <label for="Book-Name">Book Name</label>
+          <input type="text" class="form-control" id="Book-Name" />
+        </div>
+        <div class="form-group">
+          <label for="Author-Name">Author Name</label>
+          <input type="text" class="form-control" id="Author-Name" />
+        </div>
+        <div class="form-group">
+          <label for="Book-Link">Link to the Book</label>
+          <input type="url" class="form-control" id="Book-Link" />
+        </div>
+        <div class="form-group">
+          <label for="bookType">Book Type</label>
+          <div class="check-boxes my-3 mx-5">
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Fiction"
+                value="Fiction"
+              />
+              <label class="form-check-label" for="Fiction"> Fiction </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Non-Fiction"
+                value="Non-Fiction"
+              />
+              <label class="form-check-label" for="Non-Fiction"> Non-Fiction </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Mystery"
+                value="Mystery"
+              />
+              <label class="form-check-label" for="Mystery"> Mystery </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Science-Fiction"
+                value="Science-Fiction"
+              />
+              <label class="form-check-label" for="Science-Fiction"> Science Fiction </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Fantasy"
+                value="Fantasy"
+              />
+              <label class="form-check-label" for="Fantasy"> Fantasy </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Romance"
+                value="Romance"
+              />
+              <label class="form-check-label" for="Romance"> Romance </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Biography"
+                value="Biography"
+              />
+              <label class="form-check-label" for="Biography"> Biography </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="History"
+                value="History"
+              />
+              <label class="form-check-label" for="History"> History </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Self-Help"
+                value="Self-Help"
+              />
+              <label class="form-check-label" for="Self-Help"> Self-Help </label>
+            </div>
+            <div class="form-check p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="check-box"
+                id="Cooking"
+                value="Cooking"
+              />
+              <label class="form-check-label" for="Cooking"> Cooking </label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-dark">Add Book</button>
+      </form>
+      <table class="table table-dark my-3">
+        <thead>
+          <tr>
+            <th scope="col">Sl No.</th>
+            <th scope="col">Date of Issue</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Link</th>
+            <th scope="col">Genre</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <script>
+      function inputs(bookName, authorName, bookLink, type) {
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.bookLink = bookLink;
+        this.type = type;
+      }
+
+      class Display {
+        add(arrayInputs) {
+          let tableBody = document.getElementById("table-body");
+          let today = new Date().toLocaleDateString();
+          let htmltobeadded = "";
+          for (let i = 0; i < arrayInputs.length; i++) {
+            htmltobeadded += `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${today}</td>
+                <td>${arrayInputs[i].bookName}</td>
+                <td>${arrayInputs[i].authorName}</td>
+                <td><a href="${arrayInputs[i].bookLink}" target="_blank">Link</a></td>
+                <td>${arrayInputs[i].type}</td>
+                <td> <button type="button" onclick="deleteItem(${i})" class="btn btn-primary"> Delete </button> </td>
+              </tr>
+            `;
+          }
+          tableBody.innerHTML = htmltobeadded;
+        }
+
+        clear() {
+          let myForm = document.getElementById("mylibraryform");
+          myForm.reset();
+        }
+
+        validate(inputs) {
+          return inputs.bookName !== "" && inputs.authorName !== "" && inputs.bookLink !== "" && inputs.type !== undefined;
+        }
+
+        alertuser(type, sub, message) {
+          let alertuser = document.getElementById("alertuser");
+          let htmltobeaddedinalert = ` <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            <strong>${sub}</strong> ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`;
+          alertuser.innerHTML = htmltobeaddedinalert;
+          setTimeout(() => {
+            alertuser.innerHTML = "";
+          }, 4000);
+        }
+      }
+
+      function showList() {
+        let listItems = localStorage.getItem("listItems");
+        listArray = listItems ? JSON.parse(listItems) : [];
+        new Display().add(listArray);
+      }
+      showList();
+
+      function deleteItem(index) {
+        let listItems = localStorage.getItem("listItems");
+        listArray = listItems ? JSON.parse(listItems) : [];
+        listArray.splice(index, 1);
+        localStorage.setItem("listItems", JSON.stringify(listArray));
+        showList();
+      }
+
+      const form = document.getElementById("mylibraryform");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let bookName = document.getElementById("Book-Name").value;
+        let authorName = document.getElementById("Author-Name").value;
+        let bookLink = document.getElementById("Book-Link").value;
+        let type;
+        const genres = document.getElementsByName("check-box");
+        for (let genre of genres) {
+          if (genre.checked) {
+            type = genre.value;
+            break;
+          }
+        }
+
+        let inputObj = new inputs(bookName, authorName, bookLink, type);
+
+        let displayObj = new Display();
+        if (displayObj.validate(inputObj)) {
+          let listItems = localStorage.getItem("listItems");
+          listArray = listItems ? JSON.parse(listItems) : [];
+          listArray.push(inputObj);
+          localStorage.setItem("listItems", JSON.stringify(listArray));
+          displayObj.add(listArray);
+          displayObj.clear();
+          displayObj.alertuser("success", "Success", "Book added successfully!");
+        } else {
+          displayObj.alertuser("danger", "Error", "Please fill all fields and select a genre.");
+        }
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
